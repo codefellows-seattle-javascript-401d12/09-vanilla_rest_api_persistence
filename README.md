@@ -77,7 +77,7 @@ item deleted!
 
 
 ### PUT:
-parameters "name" "content" and "id" are required.
+parameters "name" "content" and "id" are required as request body not the querystring.
 ~~~
 http PUT localhost:3000/api/note id="ceaf91a0-c510-11e6-bf 7b-83ba05acfa32" name='apple'
 content='apple is a fruit.' place='seattle' favFood='some thing'
