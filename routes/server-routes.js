@@ -35,7 +35,7 @@ module.exports = function(router){
     try{
       var note = new Note(req.body.name, req.body.content, req.body.favFood, req.body.place);
       storage.createItem('note', note);
-      res.write(JSON.stringify(note));
+      response.sendJSON(res, 200, note);
       res.end();
     } catch(err){
       console.error(err);
@@ -44,8 +44,8 @@ module.exports = function(router){
   });
 
   router.delete('/api/note', function(req,res){
-    if(req.body.id){
-      storage.fetchDel('note', req.body.id)
+    if(req.url.query.id){
+      storage.fetchDel('note', req.url.query.id)
        .then(() => {
          response.sendText(res, 200, 'item deleted!');
        })
@@ -53,8 +53,8 @@ module.exports = function(router){
          console.error(err);
          response.sendText(res, 404, 'not found');
        });
-      return;
     }
+    return;
   });
 
   router.put('/api/note', function(req,res){
@@ -63,7 +63,7 @@ module.exports = function(router){
         var note = new Note(req.body.name, req.body.content, req.body.favFood, req.body.place);
         storage.put('note', req.body.id, note)
         .then(() => {
-          response.sendText(res, 200, 'Content updated!');
+          response.sendJSON(res, 200, note);
         });
       }
       catch(err){
