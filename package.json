@@ -1,0 +1,33 @@
+{
+  "name": "08-vanilla_rest_api",
+  "version": "1.0.0",
+  "description": "This rest api provides necessay backend support functionality create, read, update and delete. Currently it is saving data on the object called storage which provides a vary little persistance during server session.",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhavyaab/08-vanilla_rest_api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bhavyaab/08-vanilla_rest_api/issues"
+  },
+  "homepage": "https://github.com/bhavyaab/08-vanilla_rest_api#readme",
+  "dependencies": {
+    "node-uuid": "^1.4.7",
+  },
+  "devDependencies": {
+    "bluebird": "^3.4.6",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "superagent": "^3.3.1"
+  }
+}
