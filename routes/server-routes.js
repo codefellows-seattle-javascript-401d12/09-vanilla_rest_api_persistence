@@ -36,9 +36,16 @@ module.exports = function(router){
   router.post('/api/note', function(req,res){
     try{
       var note = new Note(req.body.name, req.body.content, req.body.favFood, req.body.place);
-      storage.createItem('note', note);
-      response.sendJSON(res, 200, note);
-      res.end();
+      storage.createItem('note', note)
+      .then(item => {
+        response.sendJSON(res, 200, item);
+        res.end();
+      })
+      .catch(err => {
+        console.error(err);
+        response.sendText(res, 404, 'bad request');
+      });
+      return;
     } catch(err){
       console.error(err);
       response.sendText(res, 400, 'bad request');
@@ -50,10 +57,13 @@ module.exports = function(router){
       storage.fetchDel('note', req.url.query.id)
        .then(() => {
          response.sendText(res, 200, 'item deleted!');
+         console.log(res.body);
+         res.end();
        })
        .catch(err => {
          console.error(err);
          response.sendText(res, 404, 'not found');
+         res.end();
        });
     }
     return;
