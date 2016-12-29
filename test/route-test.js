@@ -14,7 +14,6 @@ describe('note routes', function(){
       .end((err, res) => {
         if(err) return done(err);
         expect(res.status).to.equal(200);
-        console.log('res.body= ', res.body);
         expect(res.body.name).to.equal('apple');
         expect(res.body.content).to.equal('apple is a fruit');
         note = res.body;
@@ -53,7 +52,6 @@ describe('note routes', function(){
   });
   describe('DELETE: /api/note', function(){
     it('should delete note', function(done){
-      console.log('note id= ', note.id);
       request.delete(`localhost:3000/api/note?id=${note.id}`)
       .end((err, res) => {
         if(err) return done(err);

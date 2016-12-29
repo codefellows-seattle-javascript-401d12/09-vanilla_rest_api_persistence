@@ -11,9 +11,7 @@ const router = new Router();
 
 module.exports = function(router){
   router.get('/api/note', function(req,res){
-    console.log('inside get');
     if(req.url.query.id){
-      console.log('itemfetch called');
       storage.fetchItem('note', req.url.query.id)
       .then(note => {
         if(!note.id){
@@ -57,7 +55,6 @@ module.exports = function(router){
       storage.fetchDel('note', req.url.query.id)
        .then(() => {
          response.sendText(res, 200, 'item deleted!');
-         console.log(res.body);
          res.end();
        })
        .catch(err => {
