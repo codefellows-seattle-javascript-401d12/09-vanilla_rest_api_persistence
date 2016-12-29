@@ -11,7 +11,9 @@ const router = new Router();
 
 module.exports = function(router){
   router.get('/api/note', function(req,res){
+    console.log('inside get');
     if(req.url.query.id){
+      console.log('itemfetch called');
       storage.fetchItem('note', req.url.query.id)
       .then(note => {
         if(!note.id){
@@ -61,7 +63,8 @@ module.exports = function(router){
     if(req.body.id){
       try{
         var note = new Note(req.body.name, req.body.content, req.body.favFood, req.body.place);
-        storage.put('note', req.body.id, note)
+        note.id = req.body.id;
+        storage.createItem('note', note)
         .then(() => {
           response.sendJSON(res, 200, note);
         });
@@ -70,5 +73,7 @@ module.exports = function(router){
         console.error(err);
         response.sendText(res, 400, 'bad request');
       }
-    }});
+    }
+    if(!req.body.id) response.sendText(res, 400, 'bad request : id missing');
+  });
 };
